@@ -12,5 +12,11 @@ recipes_recommendation = {editable = true, path = "."}
 pandas = "*"
 scikit-learn = "*"
 
+[scripts]
+linter = "pylint recipes_recommendation tests"
+unit-test = "pytest tests/unit"
+integration-test = "pytest tests/integration"
+test = "pytest"
+
 [requires]
 python_version = "3.8"
