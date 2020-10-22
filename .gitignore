@@ -55,3 +55,4 @@ pyvenv.cfg
 pip-selfcheck.json
 .idea
 *.iml
+.vscode
