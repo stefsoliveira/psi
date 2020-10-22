@@ -8,3 +8,7 @@ def extract_features(dataframe):
         ],
         ['id', 'calories', 'total_fat', 'sugar', 'sodium', 'protein', 'saturated_fat']
     )
+
+
+def max_value(column_name, dataframe):
+    pass
