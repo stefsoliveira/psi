@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b3ac71e536443f3a7fafbdeed0a443d47a693eeab9f3d69e439b99c4d6fee394"
+            "sha256": "eb6c54cc4b5d1df322b9af6a90c3cb39150e89ffbe27bd9a281eeccff3be6ecb"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -97,8 +97,8 @@
             "version": "==2020.1"
         },
         "recipes-recommendation": {
-            "path": ".",
-            "version": "==0.0.1"
+            "editable": true,
+            "path": "."
         },
         "scikit-learn": {
             "hashes": [
@@ -277,10 +277,6 @@
             ],
             "index": "pypi",
             "version": "==6.1.1"
-        },
-        "recipes-recommendation": {
-            "path": ".",
-            "version": "==0.0.1"
         },
         "six": {
             "hashes": [

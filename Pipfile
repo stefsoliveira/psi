@@ -4,12 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-recipes_recommendation = {editable = true, path = "."}
 pytest = "*"
 pylint = "*"
 
 [packages]
-recipes_recommendation = {path = "."}
+recipes_recommendation = {editable = true, path = "."}
 pandas = "*"
 scikit-learn = "*"
 
