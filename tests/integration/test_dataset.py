@@ -5,9 +5,9 @@ from recipes_recommendation import dataset
 
 
 def test_should_extract_features_from_file():
-    df = pd.read_csv('tests/integration/resources/raw_recipes_dump.csv')
+    dataframe = pd.read_csv('tests/integration/resources/raw_recipes_dump.csv')
 
-    actual = dataset.extract_features(df)
+    actual = dataset.extract_features(dataframe)
     expected = pd.DataFrame(
         [
             [137739, 51.5, 0.0, 13.0, 0.0, 2.0, 0.0],

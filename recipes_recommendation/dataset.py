@@ -24,3 +24,11 @@ def normalize_nominal(column_name, dataframe):
     # apply function on each row in the new column: row / max (hint: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html)
     # return dataframe that has the new column and not the old one
     pass
+
+
+def normalize(to_normalize_column_names, dataframe):
+    # for each to_normalize_column_name in to_normalize_column_names:
+    #   normalized_dataframe = normalize_nominal(column_name, dataframe)
+    # return dataframe with all columns normalized
+    # hint: reduce on the list of to_normalize_column_names with the dataframe as initial value: https://docs.python.org/2/library/functions.html#reduce
+    pass
