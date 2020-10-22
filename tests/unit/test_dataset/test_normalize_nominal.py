@@ -43,3 +43,12 @@ def test_should_normalize_n_rows_with_n_columns():
     )
 
     pdt.assert_frame_equal(expected, actual)
+
+
+def test_should_do_nothing_if_max_value_is_0():
+    dataframe = pd.DataFrame([[0.0], [0.0]], columns=['foo'])
+
+    actual = dataset.normalize_nominal('foo', dataframe)
+    expected = pd.DataFrame([[0.0], [0.0]], columns=['normalized_foo'])
+
+    pdt.assert_frame_equal(expected, actual)
