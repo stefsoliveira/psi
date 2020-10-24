@@ -22,10 +22,8 @@ def extract_features(dataframe):
 
 
 def max_value(column_name, dataframe):
-    # order column by max value desc
-    # select first row
-    # return first row
-    pass
+    sorted_by_column = dataframe.sort_values(by=[column_name], ascending=False)
+    return sorted_by_column.iloc[0][column_name]
 
 
 def normalize_nominal(column_name, dataframe):
