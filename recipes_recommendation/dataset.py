@@ -1,13 +1,25 @@
+import json
+
 import pandas as pd
+
+NUTRITION_COLUMN = 'nutrition'
+ID_COLUMN = 'id'
+
+
+def explode_nutrition_data(row):
+    nutrition_data = json.loads(row[NUTRITION_COLUMN])
+    exploded_row = [row[ID_COLUMN]] + nutrition_data[:-1]
+    return pd.Series(
+        exploded_row,
+        [ID_COLUMN, 'calories', 'total_fat', 'sugar', 'sodium', 'protein', 'saturated_fat']
+    )
 
 
 def extract_features(dataframe):
-    return pd.DataFrame(
-        [
-            [20, 269.8, 22.0, 32.0, 48.0, 39.0, 27.0]
-        ],
-        ['id', 'calories', 'total_fat', 'sugar', 'sodium', 'protein', 'saturated_fat']
-    )
+    only_id_and_nutrition = dataframe[[ID_COLUMN, NUTRITION_COLUMN]]
+    with_exploded_nutrition_data = only_id_and_nutrition.apply(explode_nutrition_data, axis=1)
+    print(with_exploded_nutrition_data)
+    return with_exploded_nutrition_data
 
 
 def max_value(column_name, dataframe):
