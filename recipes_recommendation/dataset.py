@@ -18,7 +18,6 @@ def explode_nutrition_data(row):
 def extract_features(dataframe):
     only_id_and_nutrition = dataframe[[ID_COLUMN, NUTRITION_COLUMN]]
     with_exploded_nutrition_data = only_id_and_nutrition.apply(explode_nutrition_data, axis=1)
-    print(with_exploded_nutrition_data)
     return with_exploded_nutrition_data
 
 
