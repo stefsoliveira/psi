@@ -16,7 +16,7 @@ def test_should_return_1_for_single_value():
 def test_should_normalize_n_rows():
     dataframe = pd.DataFrame([[42.0], [1.0], [21.0]], columns=['foo'])
 
-    actual = dataset.max_value('foo', dataframe)
+    actual = dataset.normalize_nominal('foo', dataframe)
     expected = pd.DataFrame([[1.0], [1.0 / 42.0], [21.0 / 42.0]], columns=['normalized_foo'])
 
     pdt.assert_frame_equal(expected, actual)
@@ -32,7 +32,7 @@ def test_should_normalize_n_rows_with_n_columns():
         columns=['foo', 'bar']
     )
 
-    actual = dataset.max_value('bar', dataframe)
+    actual = dataset.normalize_nominal('bar', dataframe)
     expected = pd.DataFrame(
         [
             [1.0, 100.0 / 100.0],

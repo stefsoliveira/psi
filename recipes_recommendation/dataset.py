@@ -1,4 +1,5 @@
 import json
+from functools import partial
 
 import pandas as pd
 
@@ -26,13 +27,21 @@ def max_value(column_name, dataframe):
     return sorted_by_column.iloc[0][column_name]
 
 
+def normalize_nominal_row(column_name, highest_value, row):
+    normalized_row = row.copy()
+    if highest_value > 0:
+        normalized_row['normalized_' + column_name] = row[column_name] / highest_value
+    else:
+        normalized_row['normalized_' + column_name] = row[column_name]
+    del normalized_row[column_name]
+    return normalized_row
+
+
 def normalize_nominal(column_name, dataframe):
-    # calculate max_value for column and save as max
-    # create new column and name it normalized_$column_name
-    # copy old column data into the new column
-    # apply function on each row in the new column: row / max (hint: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html)
-    # return dataframe that has the new column and not the old one
-    pass
+    max_column_value = max_value(column_name, dataframe)
+    normalize_fn = partial(normalize_nominal_row, column_name, max_column_value)
+    with_normalized_column = dataframe.apply(normalize_fn, axis=1)
+    return with_normalized_column
 
 
 def normalize(to_normalize_column_names, dataframe):
