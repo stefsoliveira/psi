@@ -1,5 +1,5 @@
 import json
-from functools import partial
+from functools import partial, reduce
 
 import pandas as pd
 
@@ -37,7 +37,7 @@ def normalize_nominal_row(column_name, highest_value, row):
     return normalized_row
 
 
-def normalize_nominal(column_name, dataframe):
+def normalize_nominal(dataframe, column_name):
     max_column_value = max_value(column_name, dataframe)
     normalize_fn = partial(normalize_nominal_row, column_name, max_column_value)
     with_normalized_column = dataframe.apply(normalize_fn, axis=1)
@@ -45,6 +45,7 @@ def normalize_nominal(column_name, dataframe):
 
 
 def normalize(to_normalize_column_names, dataframe):
+    return reduce(normalize_nominal, to_normalize_column_names, dataframe)
     # for each to_normalize_column_name in to_normalize_column_names:
     #   normalized_dataframe = normalize_nominal(column_name, dataframe)
     # return dataframe with all columns normalized
