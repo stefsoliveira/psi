@@ -1,5 +1,7 @@
 import seaborn as sns
 
+from recipes_recommendation import dataset
+
 
 def feature_histogram(dataframe, output_path, feature_column):
     plot = sns.histplot(data=dataframe, x=feature_column, bins=50)
@@ -9,7 +11,7 @@ def feature_histogram(dataframe, output_path, feature_column):
 
 
 def classes_histogram(dataframe, output_path):
-    plot = sns.histplot(data=dataframe, x='class')
+    plot = sns.histplot(data=dataframe, x=dataset.LABEL_COLUMN)
     figure = plot.get_figure()
     figure.savefig(output_path + 'histogram_classes.png')
     figure.clf()

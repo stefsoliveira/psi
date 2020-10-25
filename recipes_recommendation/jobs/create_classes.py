@@ -22,13 +22,14 @@ if __name__ == "__main__":
     LOG.info("Start training clustering model")
 
     LOG.info("Start classifying")
-    classes = clustering_model.predict(dataframe[dataset.NUTRITION_COLUMNS])
+    classes = clustering_model.predict(dataframe[dataset.FEATURE_COLUMNS])
     dataframe_with_classes = dataframe.copy()
-    dataframe_with_classes['class'] = classes
+    dataframe_with_classes[dataset.LABEL_COLUMN] = classes
     LOG.info("Done classifying")
 
     LOG.info("Start saving dataset with classes to: %s", output_path)
-    dataframe_with_classes.to_csv(output_path + 'recipe_features_with_classes.csv', index=False)
+    dataframe_with_classes[[dataset.ID_COLUMN, dataset.LABEL_COLUMN]] \
+        .to_csv(output_path + 'recipe_features_with_classes.csv', index=False)
     LOG.info("Done saving dataset with classes")
 
     LOG.info("Start creating histogram of distribution of classes in: %s", output_path)

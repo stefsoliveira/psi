@@ -18,7 +18,7 @@ if __name__ == "__main__":
     LOG.info("Done loading features dataset")
 
     LOG.info("Start creating histograms in: %s", output_path)
-    for feature_column in dataset.NUTRITION_COLUMNS:
+    for feature_column in dataset.FEATURE_COLUMNS:
         LOG.info("Start creating histogram for: %s", feature_column)
         validation.feature_histogram(dataframe, output_path, feature_column)
         LOG.info("Done creating histogram")
