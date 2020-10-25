@@ -4,6 +4,7 @@ from functools import partial, reduce
 import pandas as pd
 
 NUTRITION_COLUMN = 'nutrition'
+NUTRITION_COLUMNS = ['calories', 'total_fat', 'sugar', 'sodium', 'protein', 'saturated_fat']
 ID_COLUMN = 'id'
 
 
@@ -12,7 +13,7 @@ def explode_nutrition_data(row):
     exploded_row = [row[ID_COLUMN]] + nutrition_data[:-1]
     return pd.Series(
         exploded_row,
-        [ID_COLUMN, 'calories', 'total_fat', 'sugar', 'sodium', 'protein', 'saturated_fat']
+        [ID_COLUMN] + NUTRITION_COLUMNS
     )
 
 
