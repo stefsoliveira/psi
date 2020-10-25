@@ -97,3 +97,58 @@ id,calories,total_fat,sugar,sodium,protein,saturated_fat,outlier
 75452.0,2669.3,160.0,976.0,107.0,62.0,310.0,-1
 ...
 ```
+
+### Create histograms of features and their distribution
+To create histograms for each feature and its distribution:
+```bash
+pipenv run recipes_recommendation/jobs/create_histograms.py $INPUT_FILE $OUTPUT_FOLDER
+```
+
+#### Input
+feature recipes csv file looking like:
+```csv
+id,calories,total_fat,sugar,sodium,protein,saturated_fat
+137739.0,51.5,0.0,13.0,0.0,2.0,0.0
+31490.0,173.4,18.0,0.0,17.0,22.0,35.0
+112140.0,269.8,22.0,32.0,48.0,39.0,27.0
+...
+```
+
+#### Output
+`histogram_$FEATURE_NAME.png` png file with the histogram for the `$FEATURE_NAME`.
+
+### Train and classify all recipes
+To train a clustering classifier for the recipes:
+```bash
+pipenv run recipes_recommendation/jobs/train_and_classify.py $TRAIN_DATA $PREDICTION_DATA $OUTPUT_FOLDER
+```
+
+#### Input
+Will take `$TRAIN_DATA` and `$PREDICTION_DATA` csv files to train and predict the labels.
+
+`$TRAIN_DATA` csv file for training the cluster classifier looking like:
+```csv
+id,calories,total_fat,sugar,sodium,protein,saturated_fat
+137739.0,51.5,0.0,13.0,0.0,2.0,0.0
+31490.0,173.4,18.0,0.0,17.0,22.0,35.0
+112140.0,269.8,22.0,32.0,48.0,39.0,27.0
+...
+```
+
+`$PREDICTION_DATA` csv file for training the cluster classifier looking like:
+```csv
+id,calories,total_fat,sugar,sodium,protein,saturated_fat
+137739.0,51.5,0.0,13.0,0.0,2.0,0.0
+31490.0,173.4,18.0,0.0,17.0,22.0,35.0
+112140.0,269.8,22.0,32.0,48.0,39.0,27.0
+...
+```
+
+#### Output
+`recipe_id_with_labels.csv` CSV file looking like:
+```csv
+id,label
+137739.0,4
+31490.0,6
+...
+```
