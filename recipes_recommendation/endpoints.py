@@ -1,5 +1,6 @@
 # coding=utf-8
 import logging
+import random
 import threading
 
 import pandas as pd
@@ -15,18 +16,16 @@ _DATABASE_LOCK = threading.RLock()
 
 
 def _load_database():
-    recipes = pd.read_csv('./resources/RAW_recipes.csv')
-    LOG.debug(recipes)
-    labels = pd.read_csv('./resources/recipe_id_with_labels.csv')
-    LOG.debug(labels)
-    recipes_with_labels = pd.merge(recipes, labels, on=dataset.ID_COLUMN)
-    LOG.debug(recipes_with_labels)
+    recipes = pd.read_csv('./resources/RAW_recipes.csv').sort_values(by=[dataset.ID_COLUMN])
+    labels = pd.read_csv('./resources/recipe_id_with_labels.csv').sort_values(by=[dataset.ID_COLUMN])
+    recipes_with_labels = recipes.copy()
+    recipes_with_labels[dataset.LABEL_COLUMN] = labels[dataset.LABEL_COLUMN]
     return recipes_with_labels
 
 
 def database():
     global _DATABASE
-    if not _DATABASE:
+    if _DATABASE is None:
         LOG.info("Loading database")
         with _DATABASE_LOCK:
             _DATABASE = _load_database()
@@ -43,7 +42,7 @@ def __is_valid_request(query_params):
 
 
 @APP.route('/recipes', methods=['GET'])
-def ping():
+def get_recipes():
     if not __is_valid_request(request.args):
         LOG.info('No class param present')
         return {'error': 'class is not present'}, 400
@@ -51,5 +50,8 @@ def ping():
     recipe_class = int(request.args.get('class'))
     all_recipes = database()
     recipes_with_label = all_recipes[all_recipes[dataset.LABEL_COLUMN] == recipe_class]
-    LOG.debug(recipes_with_label)
-    return recipes_with_label.T.to_dict().values()
+    recipes_with_given_label = recipes_with_label[['id', 'name']].to_dict('records')
+    if request.args.get('count'):
+        number_of_recipes = int(request.args.get('count'))
+        return {'data': random.sample(recipes_with_given_label, number_of_recipes)}, 200
+    return {'data': recipes_with_given_label}, 200

@@ -20,6 +20,7 @@ linter = "pylint recipes_recommendation tests"
 unit-test = "pytest tests/unit"
 integration-test = "pytest tests/integration"
 test = "pytest"
+dev-server = "flask run -h 0.0.0.0 -p 8080 --reload"
 
 [requires]
 python_version = "3.6"
