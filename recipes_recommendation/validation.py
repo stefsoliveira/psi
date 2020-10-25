@@ -5,7 +5,7 @@ import seaborn as sns
 LOG = logging.getLogger(__name__)
 
 
-def histogram(dataframe, output_path, feature_column):
+def feature_histogram(dataframe, output_path, feature_column):
     LOG.info(feature_column)
     plot = sns.histplot(data=dataframe, x=feature_column, bins=50)
     figure = plot.get_figure()

@@ -20,7 +20,7 @@ if __name__ == "__main__":
     LOG.info("Start creating histograms in: %s", output_path)
     for feature_column in dataset.NUTRITION_COLUMNS:
         LOG.info("Start creating histogram for: %s", feature_column)
-        validation.histogram(dataframe, output_path, feature_column)
+        validation.feature_histogram(dataframe, output_path, feature_column)
         LOG.info("Done creating histogram")
     LOG.info("Done creating histograms")
     LOG.info("Finishing job")
