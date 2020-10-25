@@ -2,6 +2,7 @@ import json
 from functools import partial, reduce
 
 import pandas as pd
+from sklearn.ensemble import IsolationForest
 
 NUTRITION_COLUMN = 'nutrition'
 NUTRITION_COLUMNS = ['calories', 'total_fat', 'sugar', 'sodium', 'protein', 'saturated_fat']
@@ -47,3 +48,16 @@ def normalize_nominal(dataframe, column_name):
 
 def normalize(to_normalize_column_names, dataframe):
     return reduce(normalize_nominal, to_normalize_column_names, dataframe)
+
+
+def train_outlier_classifier(dataframe, **kwargs):
+    classifier = IsolationForest(**kwargs)
+    classifier.fit(dataframe)
+    return classifier
+
+
+def with_outliers_column(classifier, dataframe):
+    with_column_added = dataframe.copy()
+    outliers = classifier.predict(dataframe[NUTRITION_COLUMNS])
+    with_column_added['outlier'] = outliers
+    return with_column_added
