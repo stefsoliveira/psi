@@ -6,3 +6,10 @@ def feature_histogram(dataframe, output_path, feature_column):
     figure = plot.get_figure()
     figure.savefig(output_path + 'histogram_' + feature_column + '.png')
     figure.clf()
+
+
+def classes_histogram(dataframe, output_path):
+    plot = sns.histplot(data=dataframe, x='class')
+    figure = plot.get_figure()
+    figure.savefig(output_path + 'histogram_classes.png')
+    figure.clf()
