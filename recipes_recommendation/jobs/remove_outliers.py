@@ -4,7 +4,7 @@ import sys
 
 import pandas as pd
 
-from recipes_recommendation import dataset
+from recipes_recommendation import dataset, models
 
 LOG = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     LOG.info("Done loading dataset")
 
     LOG.info("Start training outlier classifier")
-    classifier = dataset.train_outlier_classifier(features, n_estimators=30)
+    classifier = models.train_outlier_classifier(features, n_estimators=30)
     LOG.info("Done training outlier classifier")
 
     LOG.info("Start marking outliers")
