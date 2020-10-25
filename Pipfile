@@ -12,6 +12,8 @@ recipes_recommendation = {editable = true, path = "."}
 pandas = "*"
 scikit-learn = "*"
 seaborn = "*"
+flask = "*"
+gunicorn = "*"
 
 [scripts]
 linter = "pylint recipes_recommendation tests"
