@@ -34,6 +34,12 @@ pipenv run integration-tests
 pipenv run linter
 ```
 
+## Run dev server
+Will start dev server on port `8080`
+```bash
+pipenv run dev-server
+```
+
 ## Jobs
 There are multiple jobs in the `./recipes_recommendation/jobs` folder.
 To run them execute them with `pipenv run ...`
