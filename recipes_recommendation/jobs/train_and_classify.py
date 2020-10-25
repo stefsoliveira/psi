@@ -9,21 +9,23 @@ from recipes_recommendation import dataset, models, validation
 LOG = logging.getLogger(__name__)
 
 if __name__ == "__main__":
-    dataset_path = str(sys.argv[1])
-    output_path = str(sys.argv[2])
+    training_dataset_path = str(sys.argv[1])
+    predict_dataset_path = str(sys.argv[2])
+    output_path = str(sys.argv[3])
     LOG.info("Starting job: %s", __name__)
 
-    LOG.info("Loading dataset from: %s", dataset_path)
-    dataframe = pd.read_csv(dataset_path)
+    LOG.info("Loading datasets from: %s, %s", training_dataset_path, predict_dataset_path)
+    train_dataset = pd.read_csv(training_dataset_path)
+    predict_dataset = pd.read_csv(predict_dataset_path)
     LOG.info("Done loading dataset")
 
     LOG.info("Start training clustering model")
-    clustering_model = models.train_cluster_model(dataframe)
+    clustering_model = models.train_cluster_model(train_dataset)
     LOG.info("Start training clustering model")
 
     LOG.info("Start classifying")
-    classes = clustering_model.predict(dataframe[dataset.FEATURE_COLUMNS])
-    dataframe_with_classes = dataframe.copy()
+    classes = clustering_model.predict(predict_dataset[dataset.FEATURE_COLUMNS])
+    dataframe_with_classes = predict_dataset.copy()
     dataframe_with_classes[dataset.LABEL_COLUMN] = classes
     LOG.info("Done classifying")
 
