@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
     LOG.info("Start saving dataset with classes to: %s", output_path)
     dataframe_with_classes[[dataset.ID_COLUMN, dataset.LABEL_COLUMN]] \
-        .to_csv(output_path + 'recipe_features_with_classes.csv', index=False)
+        .to_csv(output_path + 'recipe_features_with_labels.csv', index=False)
     LOG.info("Done saving dataset with classes")
 
     LOG.info("Start creating histogram of distribution of classes in: %s", output_path)
