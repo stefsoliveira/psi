@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.6-slim
 WORKDIR /usr/src/app
 COPY requirements.txt setup.py ./
 COPY recipes_recommendation ./recipes_recommendation
