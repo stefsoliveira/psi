@@ -46,8 +46,3 @@ def normalize_nominal(dataframe, column_name):
 
 def normalize(to_normalize_column_names, dataframe):
     return reduce(normalize_nominal, to_normalize_column_names, dataframe)
-    # for each to_normalize_column_name in to_normalize_column_names:
-    #   normalized_dataframe = normalize_nominal(column_name, dataframe)
-    # return dataframe with all columns normalized
-    # hint: reduce on the list of to_normalize_column_names with the dataframe as initial value: https://docs.python.org/2/library/functions.html#reduce
-    pass
