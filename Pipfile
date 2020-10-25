@@ -11,6 +11,7 @@ pylint = "*"
 recipes_recommendation = {editable = true, path = "."}
 pandas = "*"
 scikit-learn = "*"
+seaborn = "*"
 
 [scripts]
 linter = "pylint recipes_recommendation tests"
@@ -19,4 +20,4 @@ integration-test = "pytest tests/integration"
 test = "pytest"
 
 [requires]
-python_version = "3.8"
+python_version = "3.6"
