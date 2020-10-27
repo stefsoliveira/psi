@@ -35,6 +35,7 @@ pipenv run linter
 ```
 
 ## Run dev server
+Make sure you have run the full pipeline first (`make run-full-pipeline`)
 Will start dev server on port `8080`
 ```bash
 pipenv run dev-server
@@ -43,6 +44,14 @@ pipenv run dev-server
 ## Jobs
 There are multiple jobs in the `./recipes_recommendation/jobs` folder.
 To run them execute them with `pipenv run ...`
+
+Or you can run them with make:
+
+```bash
+make run-data-preprocessing-pipeline # runs only all data preprocessing steps (including outlier detection)
+make run-train-pipeline # runs only the cluster model training and applies it to all data
+make run-full-pipeline # runs the whole pipeline with data preprocessing and training the cluster model/classifier
+```
 
 ### Extracting features
 To extract the features out of the raw dataset:
